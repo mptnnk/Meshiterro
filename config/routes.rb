@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   #get 'post_images/new'
   #get 'post_images/index'
   #get 'post_images/show'
-  resources:post_images,only:[:new,:create,:index,:show,:destroy]
+  resources:post_images,only:[:new,:create,:index,:show,:destroy]do
+    resources:post_comments,only:[:crate]
+  end
+  #コメントは投稿画像に対してコメントされるためpost_commentsはpost_imagesに結びつく
 
   #get 'users/show'
   #get 'users/edit'
