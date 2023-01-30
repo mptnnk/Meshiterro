@@ -1,5 +1,6 @@
 <!--部分テンプレートファイル-->
 <!--post_images index htm & users show htmll-->
+<!--投稿一覧とユーザー詳細画面のテンプレを作成、各ページに呼び出しあり-->
 <!--@post_images → post_images インスタンス変数をローカル変数にすることでviewから渡された変数を使えるようにする-->
 <% post_images.each do |post_image|%>
 <div>
@@ -13,3 +14,5 @@
   <p><%= link_to"#{post_image.post_comments.count}コメント",post_image_path(post_image.id)%></p>
 </div>
 <% end %>
+<%= paginate post_images %>
+<!--ページネーションの記述-->
