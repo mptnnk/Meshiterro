@@ -1,12 +1,15 @@
 #PostImages controller
 class PostImagesController < ApplicationController
+  
   def new
     @post_image = PostImage.new
   end
   
+  #投稿データの保存
   def create
     @post_image = PostImage.new(post_image_params)
     @post_image.user_id = current_user.id
+    
     if @post_image.save
      redirect_to post_images_path
     else
@@ -16,8 +19,9 @@ class PostImagesController < ApplicationController
 
   def index
     #@post_images = PostImage.all
-    @post_images = PostImage.page(params[:page])
+    @post_images = PostImage.page(params[:page]).reverse_order
     #pageメソッドはkaminariインストールにより使える機能。1ページ分の決められた数のデータだけを新しい順に取得する
+    #reverse_orderなんてカリキュラムにあったっけ？あとで調べる
   end
 
   def show
@@ -33,6 +37,7 @@ class PostImagesController < ApplicationController
 
 private
 
+ #投稿データのストロングパラメータ
  def post_image_params
    params.require(:post_image).permit(:shop_name,:image,:caption)
  end

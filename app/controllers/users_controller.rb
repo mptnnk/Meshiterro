@@ -3,8 +3,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     #@post_images = @user.post_images
-    @post_images = @user.post_images.page(params[:page])
+    @post_images = @user.post_images.page(params[:page]).reverse_order
     #ユーザーに関連付いたpostimageの取得をしているため、ページメソッドを使用して表示数を制限
+    #reverse_orderって何？
   end
 
   def edit
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to user_path
+    redirect_to user_path(@user.id)
   end
 
 private

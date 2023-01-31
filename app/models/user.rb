@@ -5,13 +5,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one_attached:profile_image
 
   has_many:post_images,dependent: :destroy
   #user側がpost_imagesをhas manyである。userが削除されると追随してpost_imagesもdestroyされる
   has_many:post_comments,dependent: :destroy
-  
   has_many:favorites,dependent: :destroy
+  has_one_attached:profile_image
   
   
   def get_profile_image(width,height)
